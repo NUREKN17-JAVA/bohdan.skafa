@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     1 окт. 2019 г. 09:54:05                                                        
+
+     project    
+     description
+                   
+     Badyan                                                                
+     ====================================================================== -->
+
+<project name="usermanagement" basedir="." default="test">
+    <description>
+            
+    </description>
+
+	<property name="main-java-dir" value="${basedir}/src/main/java" />
+	<property name="test-java-dir" value="${basedir}/src/test/java" />
+	<property name="build-dir" value="${basedir}/bin" />
+	<property name="classes-dir" value="${build-dir}/classes"/> 
+
+	
+    <!-- ================================= 
+          target: test              
+         ================================= -->
+	
+    <target name="test" depends="test-compile, compile" description="init">
+        <junit>
+        	<classpath>
+        		<pathelement location="${build-dir}"/>
+        	</classpath>
+        	<test name="ua.nure.cs.skafa.usermanagement.domain.UserTest" />
+        	<formatter type="plain"/>
+        </junit>
+    </target>
+
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: test-compile                      
+         - - - - - - - - - - - - - - - - - -->
+	
+    <target name="test-compile" depends="compile">
+    	<javac srcdir="${test-java-dir}" destdir="${build-dir}" />
+    </target>
+	
+	<target name="compile" depends="init">
+		<javac srcdir="${main-java-dir}" destdir="${build-dir}" />
+	</target>
+	
+	<target name="init">
+		<mkdir dir="${build-dir}"/>
+		<mkdir dir="${classes-dir}"/> 
+	</target>
+	 <!-- - - - - - - - - - - - - - - - - - 
+	<target name="clean">
+		<delete dir="${build-dir}" failonerror="no"/>
+	</target>
+	 - - - - - - - - - - - - - - - - - -->
+</project>
