@@ -1,13 +1,12 @@
 package ua.nure.cs.skafa.usermanagement.domain.db;
 
+import java.util.Collection;
 import java.util.Date;
-
 import org.dbunit.DatabaseTestCase;
 import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.XmlDataSet;
-
 import junit.framework.TestCase;
 import ua.nure.cs.skafa.usermanagement.domain.User;
 
@@ -17,7 +16,6 @@ public class HsqldbUserDaoTest extends DatabaseTestCase {
 	private ConnectionFactory connectionFactory;
 	
 	
-
 	protected void setUp() throws Exception {
 		super.setUp();
 		dao = new HsqldbUserDao(connectionFactory);
@@ -43,6 +41,18 @@ public class HsqldbUserDaoTest extends DatabaseTestCase {
 
 	}
 
+	public void testFindAll() {
+		try {
+			Collection collection = dao.findAll();
+            assertNotNull("Collection is null", collection);
+            assertEquals("Collection size.", 2, collection.size());
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+			fail(e.toString());
+		}
+	}
+	
+	
 	@Override
 	protected IDatabaseConnection getConnection() throws Exception {
 		connectionFactory = new ConnectionFactoryImpl();
