@@ -6,7 +6,13 @@ import java.util.Properties;
 public class DaoFactory {
 
 	private final Properties properties;
-	private static final String USER_DAO = "ua.nure.cs.skafa.usermanagement.domain.db.UserDao";
+	private static final String USER_DAO = "dao.ua.nure.cs.skafa.usermanagement.domain.db.UserDao";
+	
+	private final static DaoFactory INSTANCE = new DaoFactory();
+	    
+	public static DaoFactory getInstance() {
+		return INSTANCE;
+	    }
 	
 	public DaoFactory() {
 		properties = new Properties();
@@ -30,7 +36,8 @@ public class DaoFactory {
 		UserDao result = null;
 		try {
 			Class clazz = Class.forName(properties.getProperty(USER_DAO));
-			UserDao userDao = (UserDao) clazz.newInstance();
+			result = (UserDao) clazz.newInstance();
+			result.setConnectionFactory(getConnectionFactory());
 		}catch (Exception e) {
 			throw new RuntimeException(e);
 		}

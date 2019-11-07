@@ -13,7 +13,7 @@ import java.util.LinkedList;
 import ua.nure.cs.skafa.usermanagement.domain.db.UserDao;
 import ua.nure.cs.skafa.usermanagement.domain.User;
 
-public class HsqldbUserDao implements UserDao {
+class HsqldbUserDao implements UserDao {
 	
 	private ConnectionFactory connectionFactory;
 	private static final String INSERT_QUERY = "INSERT INTO users (firstname,lastname,dateofbirth) VALUES (?,?,?)";
@@ -24,7 +24,7 @@ public class HsqldbUserDao implements UserDao {
 	}
 	
 	public HsqldbUserDao() {
-		
+
 	}
 	
 	public ConnectionFactory getConnectionFactory() {
