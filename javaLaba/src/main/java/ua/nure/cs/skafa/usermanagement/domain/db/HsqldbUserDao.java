@@ -1,5 +1,9 @@
 package ua.nure.cs.skafa.usermanagement.domain.db;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Collection;
 
 import ua.nure.cs.skafa.usermanagement.domain.db.UserDao;
@@ -8,6 +12,7 @@ import ua.nure.cs.skafa.usermanagement.domain.User;
 public class HsqldbUserDao implements UserDao {
 	
 	private ConnectionFactory connectionFactory;
+	private static final String INSERT_QEURY = "INSERT INTO user (firstname, lastname, dataOfBirth) VALUE (?, ?, ?)";
 	
 	public HsqldbUserDao(ConnectionFactory connectionFactory) {
 		this.connectionFactory = connectionFactory;
@@ -15,7 +20,25 @@ public class HsqldbUserDao implements UserDao {
 
 	@Override
 	public User create(User user) throws DatabaseException {
-		return null;
+		try {
+			Connection connection = connectionFactory.createConnection();
+			PreparedStatement statement = connection
+					.prepareStatement(INSERT_QEURY);
+			statement.setString(1, user.getFirstName());
+			statement.setString(2, user.getLastName());
+			statement.setDate(3, new Date(user.getDateOfBirth().getTime()));
+			int n = statement.executeUpdate();
+			if  (n != 1) { 
+				throw new DatabaseException("Number of the inserted rows: " + n);
+			}
+			return null;
+			
+		} catch (SQLException e) { 	
+			throw new DatabaseException(e);			
+		} catch (DatabaseException e) {
+			throw e;
+		}
+		
 	}
 
 	@Override
