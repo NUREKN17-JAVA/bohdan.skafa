@@ -30,15 +30,24 @@ public class HsqldbUserDao implements UserDao {
 			statement.setString(2, user.getLastName());
 			statement.setDate(3, new Date(user.getDateOfBirth().getTime()));
 			int n = statement.executeUpdate();
+			
 			if  (n != 1) { 
 				throw new DatabaseException("Number of the inserted rows: " + n);
 			}
+			
 			CallableStatement callableStatement = connection.prepareCall("call IDENTIFY()");
 			ResultSet keys = callableStatement.executeQuery();
+			
 			if (keys.next()) {
 				user.setId(new Long(keys.getLong(1)));
 			}
-			return null;
+			
+			keys.close();
+			callableStatement.close();
+			statement.close();
+			connection.close();
+			
+			return user;
 			
 		} catch (SQLException e) { 	
 			throw new DatabaseException(e);			
