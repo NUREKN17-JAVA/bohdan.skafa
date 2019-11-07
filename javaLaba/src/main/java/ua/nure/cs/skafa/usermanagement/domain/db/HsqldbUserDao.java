@@ -1,8 +1,10 @@
 package ua.nure.cs.skafa.usermanagement.domain.db;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -30,6 +32,11 @@ public class HsqldbUserDao implements UserDao {
 			int n = statement.executeUpdate();
 			if  (n != 1) { 
 				throw new DatabaseException("Number of the inserted rows: " + n);
+			}
+			CallableStatement callableStatement = connection.prepareCall("call IDENTIFY()");
+			ResultSet keys = callableStatement.executeQuery();
+			if (keys.next()) {
+				user.setId(new Long(keys.getLong(1)));
 			}
 			return null;
 			
