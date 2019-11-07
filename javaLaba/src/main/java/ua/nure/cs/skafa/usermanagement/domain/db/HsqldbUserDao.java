@@ -14,7 +14,7 @@ import ua.nure.cs.skafa.usermanagement.domain.User;
 public class HsqldbUserDao implements UserDao {
 	
 	private ConnectionFactory connectionFactory;
-	private static final String INSERT_QEURY = "INSERT INTO user (firstname, lastname, dataOfBirth) VALUE (?, ?, ?)";
+	private static final String INSERT_QUERY = "INSERT INTO users (firstname,lastname,dateofbirth) VALUES (?,?,?)";
 	
 	public HsqldbUserDao(ConnectionFactory connectionFactory) {
 		this.connectionFactory = connectionFactory;
@@ -24,8 +24,8 @@ public class HsqldbUserDao implements UserDao {
 	public User create(User user) throws DatabaseException {
 		try {
 			Connection connection = connectionFactory.createConnection();
-			PreparedStatement statement = connection
-					.prepareStatement(INSERT_QEURY);
+			PreparedStatement statement = 
+					connection.prepareStatement(INSERT_QUERY);
 			statement.setString(1, user.getFirstName());
 			statement.setString(2, user.getLastName());
 			statement.setDate(3, new Date(user.getDateOfBirth().getTime()));
@@ -35,7 +35,7 @@ public class HsqldbUserDao implements UserDao {
 				throw new DatabaseException("Number of the inserted rows: " + n);
 			}
 			
-			CallableStatement callableStatement = connection.prepareCall("call IDENTIFY()");
+			CallableStatement callableStatement = connection.prepareCall("call IDENTITY()");
 			ResultSet keys = callableStatement.executeQuery();
 			
 			if (keys.next()) {
