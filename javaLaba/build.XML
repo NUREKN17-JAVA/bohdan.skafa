@@ -49,9 +49,10 @@
 		<mkdir dir="${build-dir}"/>
 		<mkdir dir="${classes-dir}"/> 
 	</target>
-	 <!-- - - - - - - - - - - - - - - - - - 
+	
 	<target name="clean">
 		<delete dir="${build-dir}" failonerror="no"/>
 	</target> 
-	 - - - - - - - - - - - - - - - - - -->
+  
 </project>
+
