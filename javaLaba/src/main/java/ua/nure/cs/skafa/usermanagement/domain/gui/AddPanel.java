@@ -74,7 +74,7 @@ public class AddPanel extends JPanel implements ActionListener {
 			fieldPanel = new JPanel();
 			fieldPanel.setLayout(new GridLayout(3, 2));
 			addLabelField(fieldPanel, "Name", getFirstNameField()); //$NON-NLS-1$
-			addLabelField(fieldPanel, "Last name", getLastNameField()); //$NON-NLS-1$
+			addLabelField(fieldPanel, "LastName", getLastNameField()); //$NON-NLS-1$
 			addLabelField(fieldPanel, "Day of Birth", getDateOfBirthField()); //$NON-NLS-1$
 		}
 		return fieldPanel;
@@ -111,8 +111,9 @@ public class AddPanel extends JPanel implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent e) {
+		this.setVisible(false);
+		parent.showBrowsePanel();
 		
 	}
 	

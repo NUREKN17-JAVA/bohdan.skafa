@@ -10,7 +10,7 @@ import ua.nure.cs.skafa.usermanagement.domain.User;
 
 public class UserTableModel extends AbstractTableModel {
 
-	private static final String[] COLUMN_NAMES = {"ID", "Name", "Last name"};
+	private static final String[] COLUMN_NAMES = {"ID", "Name", "LastName"};
 	private static final Class[] COLUMN_CLASSES = {Long.class, String.class, String.class};
 	private List users = null;
 	
@@ -18,14 +18,15 @@ public class UserTableModel extends AbstractTableModel {
 		this.users = new ArrayList(users);
 	}
 	
+	@Override
 	public int getColumnCount() {
-		return users.size();
-	}
-
-	public int getRowCount() {
 		return COLUMN_NAMES.length;
 	}
-
+	@Override
+	public int getRowCount() {
+		return users.size();
+	}
+	@Override
 	public Class getColumnClass(int columnIndex) {
 		return COLUMN_CLASSES[columnIndex];
 	}
