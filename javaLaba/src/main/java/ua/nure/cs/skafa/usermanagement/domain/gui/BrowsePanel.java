@@ -7,10 +7,12 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import ua.nure.cs.skafa.usermanagement.domain.db.DatabaseException;
 import ua.nure.cs.skafa.usermanagement.util.Messages;
 
 public class BrowsePanel extends JPanel implements ActionListener {
@@ -48,23 +50,6 @@ public class BrowsePanel extends JPanel implements ActionListener {
 		return buttonPanel;
 	}
 	
-	private JScrollPane getTablePanel() {
-		if (tablePanel == null) {
-			tablePanel = new JScrollPane(getUserTable());
-		}
-		return tablePanel;
-	}
-
-	private JTable getUserTable() {
-		if (userTable == null) {
-			userTable = new JTable();
-			userTable.setName("userTable"); //$NON-NLS-1$
-			UserTableModel model = new UserTableModel(new ArrayList ());
-			userTable.setModel(model);
-		}
-		return userTable;
-	}
-
 	private JButton getDetailsButton() {
 		if (detailsButton == null) {
 			detailsButton = new JButton();
@@ -109,6 +94,34 @@ public class BrowsePanel extends JPanel implements ActionListener {
 		return addButton;
 	}
 
+	private JScrollPane getTablePanel() {
+		if (tablePanel == null) {
+			tablePanel = new JScrollPane(getUserTable());
+		}
+		return tablePanel;
+	}
+
+	private JTable getUserTable() {
+		if (userTable == null) {
+			userTable = new JTable();
+			userTable.setName("userTable"); //$NON-NLS-1$
+		}
+//		initTable();
+		return userTable;
+	}
+
+	public void initTable() {
+		UserTableModel model;
+		try {
+			model = new UserTableModel(parent.getDao().findAll());
+		} catch (DatabaseException e) {
+			model = new UserTableModel(new ArrayList());
+			JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		getUserTable().setModel(model);
+	}
+
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String actionCommand = e.getActionCommand();
@@ -118,7 +131,5 @@ public class BrowsePanel extends JPanel implements ActionListener {
 		}
 		
 	}
-
-
 
 }

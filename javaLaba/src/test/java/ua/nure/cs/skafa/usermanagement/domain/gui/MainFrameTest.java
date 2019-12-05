@@ -30,7 +30,8 @@ public class MainFrameTest extends JFCTestCase {
 		
 		try {
 		Properties properties = new Properties();
-		properties.setProperty("main.java.ua.nure.cs.skafa.usermanagement.domain.db.UserDao;", MockUserDao.class.getName());
+		//main.java.ua.nure.cs.skafa.usermanagement.domain.db.UserDao; 
+		properties.setProperty("ua.nure.cs.skafa.usermanagement.domain.db.UserDao", MockUserDao.class.getName());
 		properties.setProperty("daoFactory", DaoFactoryImpl.class.getName());
 		DaoFactory.getInstance().init(properties);
 		

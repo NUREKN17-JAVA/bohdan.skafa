@@ -6,6 +6,8 @@ import java.awt.Component;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import ua.nure.cs.skafa.usermanagement.domain.db.DaoFactory;
+import ua.nure.cs.skafa.usermanagement.domain.db.UserDao;
 import ua.nure.cs.skafa.usermanagement.util.Messages;
 
 public class MainFrame extends JFrame {
@@ -15,10 +17,16 @@ public class MainFrame extends JFrame {
 	private JPanel contentPanel;
 	private JPanel browsePanel;
 	private AddPanel addPanel;
+	private UserDao dao;
 	
 	public MainFrame() {
 		super();
+		dao = DaoFactory.getInstance().getUserDao();
 		initialize();
+	}
+
+	public UserDao getDao() {
+		return dao;
 	}
 
 	private void initialize() {
@@ -41,6 +49,7 @@ public class MainFrame extends JFrame {
 		if (browsePanel == null) {
 			browsePanel = new BrowsePanel(this);
 		}
+		((BrowsePanel)browsePanel).initTable();
 		return browsePanel;
 	}
 

@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import main.java.ua.nure.cs.skafa.usermanagement.domain.db.UserDao;
+import ua.nure.cs.skafa.usermanagement.domain.db.UserDao; // main.java.ua.nure.cs.skafa.usermanagement.domain.db.UserDao;
 import ua.nure.cs.skafa.usermanagement.domain.User;
 
 public class MockUserDao implements UserDao {
