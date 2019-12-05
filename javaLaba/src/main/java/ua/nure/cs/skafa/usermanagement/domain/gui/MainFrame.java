@@ -46,11 +46,11 @@ public class MainFrame extends JFrame {
 	}
 	
 	private JPanel getBrowsePanel() {
-		if (browsePanel == null) {
+		if (browsePanel == null) {	
 			browsePanel = new BrowsePanel(this);
 		}
 		((BrowsePanel)browsePanel).initTable();
-		return browsePanel;
+			return browsePanel;
 	}
 
 	public static void main(String[] args) {

@@ -1,9 +1,9 @@
 package ua.nure.cs.skafa.usermanagement.domain.gui;
 
 
-
 import java.awt.Component;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 
@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import com.mockobjects.dynamic.Mock;
+
 import junit.extensions.jfcunit.JFCTestCase;
 import junit.extensions.jfcunit.JFCTestHelper;
 import junit.extensions.jfcunit.eventdata.MouseEventData;
@@ -19,22 +21,26 @@ import junit.extensions.jfcunit.eventdata.StringEventData;
 import junit.extensions.jfcunit.finder.NamedComponentFinder;
 import ua.nure.cs.skafa.usermanagement.domain.db.DaoFactory;
 import ua.nure.cs.skafa.usermanagement.domain.db.DaoFactoryImpl;
+import ua.nure.cs.skafa.usermanagement.domain.db.MockDaoFactory;
 import ua.nure.cs.skafa.usermanagement.domain.db.MockUserDao;
 
 public class MainFrameTest extends JFCTestCase {
 
 	private MainFrame mainFrame;
-
+	private Mock mockUserDao;
+	
 	protected void setUp() throws Exception {
 		super.setUp();
 		
 		try {
 		Properties properties = new Properties();
-		//main.java.ua.nure.cs.skafa.usermanagement.domain.db.UserDao; 
-		properties.setProperty("ua.nure.cs.skafa.usermanagement.domain.db.UserDao", MockUserDao.class.getName());
-		properties.setProperty("daoFactory", DaoFactoryImpl.class.getName());
-		DaoFactory.getInstance().init(properties);
 		
+		//main.java.ua.nure.cs.skafa.usermanagement.domain.db.UserDao; 
+		properties.setProperty("daoFactory", MockDaoFactory.class.getName());
+		DaoFactory.getInstance().init(properties);
+		mockUserDao = ((MockDaoFactory) DaoFactory.getInstance()).getMockUserDao();
+		
+		mockUserDao.expectAndReturn("findAll", new ArrayList());
 		setHelper(new JFCTestHelper());
 		mainFrame = new MainFrame();
 		
@@ -45,9 +51,15 @@ public class MainFrameTest extends JFCTestCase {
 	}
 
 	protected void tearDown() throws Exception {
-		mainFrame.setVisible(false);
-		getHelper().cleanUp(this);
-		super.tearDown();
+		try {
+			mockUserDao.verify();
+			mainFrame.setVisible(false);
+			getHelper().cleanUp(this);
+			super.tearDown();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private  Component find (Class componentClass, String name) {
