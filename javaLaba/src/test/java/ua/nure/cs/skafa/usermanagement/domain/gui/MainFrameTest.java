@@ -5,6 +5,7 @@ package ua.nure.cs.skafa.usermanagement.domain.gui;
 import java.awt.Component;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.Properties;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -16,6 +17,9 @@ import junit.extensions.jfcunit.JFCTestHelper;
 import junit.extensions.jfcunit.eventdata.MouseEventData;
 import junit.extensions.jfcunit.eventdata.StringEventData;
 import junit.extensions.jfcunit.finder.NamedComponentFinder;
+import ua.nure.cs.skafa.usermanagement.domain.db.DaoFactory;
+import ua.nure.cs.skafa.usermanagement.domain.db.DaoFactoryImpl;
+import ua.nure.cs.skafa.usermanagement.domain.db.MockUserDao;
 
 public class MainFrameTest extends JFCTestCase {
 
@@ -23,8 +27,19 @@ public class MainFrameTest extends JFCTestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
+		
+		try {
+		Properties properties = new Properties();
+		properties.setProperty("main.java.ua.nure.cs.skafa.usermanagement.domain.db.UserDao;", MockUserDao.class.getName());
+		properties.setProperty("daoFactory", DaoFactoryImpl.class.getName());
+		DaoFactory.getInstance().init(properties);
+		
 		setHelper(new JFCTestHelper());
 		mainFrame = new MainFrame();
+		
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		mainFrame.setVisible(true);
 	}
 
