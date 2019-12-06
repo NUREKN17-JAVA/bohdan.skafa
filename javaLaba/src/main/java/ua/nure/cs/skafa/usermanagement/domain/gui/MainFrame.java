@@ -6,6 +6,7 @@ import java.awt.Component;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import ua.nure.cs.skafa.usermanagement.domain.User;
 import ua.nure.cs.skafa.usermanagement.domain.db.DaoFactory;
 import ua.nure.cs.skafa.usermanagement.domain.db.UserDao;
 import ua.nure.cs.skafa.usermanagement.util.Messages;
@@ -17,6 +18,8 @@ public class MainFrame extends JFrame {
 	private JPanel contentPanel;
 	private JPanel browsePanel;
 	private AddPanel addPanel;
+	private EditPanel editPanel;
+	private DetailsPanel detailsPanel;
 	private UserDao dao;
 	
 	public MainFrame() {
@@ -58,6 +61,19 @@ public class MainFrame extends JFrame {
 		frame.setVisible(true);
 
 	}
+	
+	 private EditPanel getEditPanel() {
+	        if (editPanel == null) {
+	            editPanel = new EditPanel(this);
+	        }
+	        return editPanel;
+	    }
+	
+	 public void showEditPanel(User user) {
+
+	    getEditPanel().setUser(user);
+        showPanel(getEditPanel());
+     }
 
 	public void showAddPanel() {
 		showPanel(getAddPanel());
@@ -74,6 +90,18 @@ public class MainFrame extends JFrame {
 	public void showBrowsePanel() {
         showPanel(getBrowsePanel());
     }
+	
+	 public void showDetailsPanel(User user) {
+	        getDetailsPanel().setUser(user);
+	        showPanel(getDetailsPanel());
+	    }
+	
+	    private DetailsPanel getDetailsPanel() {
+	        if (detailsPanel == null) {
+	            detailsPanel = new DetailsPanel(this);
+	        }
+	        return detailsPanel;
+	    }
 
 	private AddPanel getAddPanel() {
 		if (addPanel == null) {
