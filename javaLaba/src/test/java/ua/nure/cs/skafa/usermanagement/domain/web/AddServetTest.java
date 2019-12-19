@@ -23,7 +23,7 @@ public class AddServetTest extends MockServlerTestCase {
 
 	        addRequestParameter("firstName", user.getFirstName());
 	        addRequestParameter("lastName", user.getLastName());
-	        addRequestParameter("dateOfBirthd", DateFormat.getDateInstance().format(user.getDateOfBirthd()));
+	        addRequestParameter("dateOfBirthd", DateFormat.getDateInstance().format(user.getDateOfBirth()));
 	        addRequestParameter("ok", "Ok");
 	        doPost();
 	    }
@@ -31,7 +31,7 @@ public class AddServetTest extends MockServlerTestCase {
 	    public void testAddEmptyFirstName() {
 	        Date date = new Date();
 	        User user = new User(1000L, "Jon", "Doue", date);
-	        addRequestParameter("dateOfBirthd", DateFormat.getDateInstance().format(user.getDateOfBirthd()));
+	        addRequestParameter("dateOfBirthd", DateFormat.getDateInstance().format(user.getDateOfBirth()));
 	        addRequestParameter("lastName", user.getLastName());
 	        addRequestParameter("ok", "Ok");
 	        doPost();
@@ -42,7 +42,7 @@ public class AddServetTest extends MockServlerTestCase {
 	    public void testAddEmptyLastName() {
 	        Date date = new Date();
 	        User user = new User(1000L, "Jon", "Doue", date);
-	        addRequestParameter("dateOfBirthd", DateFormat.getDateInstance().format(user.getDateOfBirthd()));
+	        addRequestParameter("dateOfBirthd", DateFormat.getDateInstance().format(user.getDateOfBirth()));
 	        addRequestParameter("firstName", user.getFirstName());
 	        addRequestParameter("ok", "Ok");
 	        doPost();

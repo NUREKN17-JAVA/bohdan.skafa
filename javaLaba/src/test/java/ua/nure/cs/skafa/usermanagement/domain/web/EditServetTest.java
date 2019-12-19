@@ -58,4 +58,5 @@ public class EditServetTest extends MockServlerTestCase {
         String errorMessage = (String) getWebMockObjectFactory().getMockRequest().getAttribute("error");
         assertNotNull(errorMessage);
     }
+    
 }

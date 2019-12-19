@@ -11,7 +11,6 @@ import ua.nure.cs.skafa.usermanagement.domain.db.MockDaoFactory;
 
 public class MockServlerTestCase extends BasicServletTestCaseAdapter {
 
-
     private Mock mockUserDao;
 
     protected Mock getMockUserDao() {

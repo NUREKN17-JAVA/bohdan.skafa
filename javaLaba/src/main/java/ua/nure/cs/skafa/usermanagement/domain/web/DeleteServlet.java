@@ -32,4 +32,5 @@ public class DeleteServlet extends HttpServlet {
        req.getRequestDispatcher("/delete.jsp").forward(req, resp);
 
     }
+    
 }

@@ -57,5 +57,4 @@ public class BrowseServletTest extends MockServlerTestCase {
 	        assertNotNull(returnedUser);
 	        assertSame(user, returnedUser);
 	    }
-
 }
