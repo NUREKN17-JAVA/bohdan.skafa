@@ -28,7 +28,6 @@ class HsqldbUserDao implements UserDao {
 	}
 	
 	public HsqldbUserDao() {
-
 	}
 	
 	public ConnectionFactory getConnectionFactory() {

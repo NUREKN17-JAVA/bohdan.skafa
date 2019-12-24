@@ -3,6 +3,7 @@ package ua.nure.cs.skafa.usermanagement.domain.db;
 import java.util.Collection;
 import ua.nure.cs.skafa.usermanagement.domain.User;
 
+
 public interface UserDao {
 	
 	User create(User user) throws DatabaseException;

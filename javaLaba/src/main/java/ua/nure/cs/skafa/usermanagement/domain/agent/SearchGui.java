@@ -67,6 +67,7 @@ public class SearchGui extends JFrame {
     /**
      * @return
      */
+    
     private JTable getTable() {
         if (table == null) {
             table = new JTable(new UserTableModel(new LinkedList()));
