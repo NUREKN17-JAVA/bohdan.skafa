@@ -31,7 +31,7 @@ public class SearchRequestBehavior extends Behaviour {
         }
     }
 
-    @Override
+
     public boolean done() {
         return true;
     }

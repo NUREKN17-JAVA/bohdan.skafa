@@ -42,7 +42,12 @@ public class SearchAgent extends Agent {
         }
 
         addBehaviour(new TickerBehaviour(this, 60000)  {
-            @Override
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = -3028166611286960074L;
+
+			@Override
             protected void onTick() {
                 DFAgentDescription agentDescription = new DFAgentDescription();
                 ServiceDescription serviceDescription = new ServiceDescription();
@@ -64,7 +69,6 @@ public class SearchAgent extends Agent {
         addBehaviour(new RequestServer());
     }
 
-    
     @Override
     protected void takeDown() {
         System.out.println(getAID().getName() + " finished");
