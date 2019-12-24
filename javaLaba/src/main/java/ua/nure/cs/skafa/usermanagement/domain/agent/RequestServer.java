@@ -13,14 +13,19 @@ import java.util.LinkedList;
 import java.util.StringTokenizer;
 
 public class RequestServer extends CyclicBehaviour {
-    @Override
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3805331506281493415L;
+
+	@Override
     public void action() {
         ACLMessage message = myAgent.receive();
         if (message != null) {
             if (message.getPerformative() == ACLMessage.REQUEST) {
                 myAgent.send(createReply(message));
             } else {
-                Collection users = parseMessage(message);
+                Collection<User> users = parseMessage(message);
                 ((SearchAgent) myAgent).showUsers(users);
             }
         } else {
@@ -28,7 +33,7 @@ public class RequestServer extends CyclicBehaviour {
         }
     }
 
-    private Collection parseMessage(ACLMessage message) {
+    private Collection<User> parseMessage(ACLMessage message) {
         Collection<User> users = new LinkedList<>();
 
         String content = message.getContent();

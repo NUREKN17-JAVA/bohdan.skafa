@@ -54,14 +54,12 @@ public class UserTableModel extends AbstractTableModel {
 		return null;
 	}
 
-	public void addUsers(Collection users2) {
-		// TODO Auto-generated method stub
-		
-	}
+	  public void addUsers(Collection<User> users) {
+	        this.users.addAll(users);
+	    }
 
-	public void clearUsers() {
-		// TODO Auto-generated method stub
-		
-	}
+	    public void clearUsers() {
+	        this.users = new ArrayList();
+	    }
 
 }

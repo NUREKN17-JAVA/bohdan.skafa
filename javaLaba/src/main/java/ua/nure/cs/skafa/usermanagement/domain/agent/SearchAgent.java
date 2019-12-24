@@ -16,9 +16,7 @@ import jade.domain.FIPAException;
 import java.util.Collection;
 
 public class SearchAgent extends Agent {
-    /**
-	 * 
-	 */
+   
 	private static final long serialVersionUID = 2305711707908039257L;
 	private AID[] aids;
     private SearchGui gui = null;
@@ -43,7 +41,7 @@ public class SearchAgent extends Agent {
             e.printStackTrace();
         }
 
-        addBehaviour(new TickerBehaviour(this, 60000) {
+        addBehaviour(new TickerBehaviour(this, 60000)  {
             @Override
             protected void onTick() {
                 DFAgentDescription agentDescription = new DFAgentDescription();
@@ -66,6 +64,7 @@ public class SearchAgent extends Agent {
         addBehaviour(new RequestServer());
     }
 
+    
     @Override
     protected void takeDown() {
         System.out.println(getAID().getName() + " finished");

@@ -132,7 +132,7 @@ public class SearchGui extends JFrame {
         private JButton getCancelButton() {
             if (cancelButton == null) {
                 cancelButton = new JButton();
-                cancelButton.setText(Message.getString("AddPanel.cancel")); //$NON-NLS-1$
+                cancelButton.setText("AddPanel.cancel"); //$NON-NLS-1$
                 cancelButton.setName("cancelButton"); //$NON-NLS-1$
                 cancelButton.setActionCommand("cancel"); //$NON-NLS-1$
                 cancelButton.addActionListener(this);
