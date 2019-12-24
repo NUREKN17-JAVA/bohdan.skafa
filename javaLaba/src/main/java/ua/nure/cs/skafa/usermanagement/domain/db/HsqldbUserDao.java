@@ -190,4 +190,10 @@ class HsqldbUserDao implements UserDao {
 		return result;
 	}
 
+	@Override
+	public Collection findAll(String firstName, String lastName) throws DatabaseException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
